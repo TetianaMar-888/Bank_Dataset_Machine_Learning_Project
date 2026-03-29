@@ -20,11 +20,29 @@ SHAP аналіз важливості ознак
 Аналіз помилок через duration_test
 
 
-Моделі
-#МодельОсобливості1Logistic Regressionбазова лінія, C=1.02kNNn_neighbors=53Decision Treedefault, max_depth=3, max_depth=54XGBoostdefault, RandomizedSearch, Bayesian Optimization
+## Моделі
 
-Таблиця результатів
-МодельROC-AUC ValROC-AUC TestF1 TestRecall TestКоментарLogistic Regression0.710.730.390.42Базова лініяkNN0.710.730.390.47Повільний, слабкийDT (default)0.630.630.320.36Перенавчання DT (max_depth=5)0.750.750.470.57Хороший RecallDT (max_depth=3)0.750.760.460.61Найкращий Recall XGBoost (default)0.770.780.430.38Хороший базовийXGBoost (RandomizedSearch)0.760.770.430.37Гірший за defaultXGBoost (Bayesian)0.780.790.460.43Найкращий ROC-AUC 
+| # | Модель | Особливості |
+|---|---|---|
+| 1 | Logistic Regression | базова лінія, C=1.0 |
+| 2 | kNN | n_neighbors=5 |
+| 3 | Decision Tree | default, max_depth=3, max_depth=5 |
+| 4 | XGBoost | default, RandomizedSearch, Bayesian Optimization |
+
+---
+
+## Таблиця результатів
+
+| Модель | ROC-AUC Val | ROC-AUC Test | F1 Test | Recall Test | Коментар |
+|---|---|---|---|---|---|
+| Logistic Regression | 0.71 | 0.73 | 0.39 | 0.42 | Базова лінія |
+| kNN | 0.71 | 0.73 | 0.39 | 0.47 | Повільний, слабкий |
+| DT (default) | 0.63 | 0.63 | 0.32 | 0.36 | Перенавчання ❌ |
+| DT (max_depth=5) | 0.75 | 0.75 | 0.47 | 0.57 | Хороший Recall |
+| **DT (max_depth=3)** | **0.75** | **0.76** | **0.46** | **0.61** | **Найкращий Recall ✅** |
+| XGBoost (default) | 0.77 | 0.78 | 0.43 | 0.38 | Хороший базовий |
+| XGBoost (RandomizedSearch) | 0.76 | 0.77 | 0.43 | 0.37 | Гірший за default |
+| **XGBoost (Bayesian)** | **0.78** | **0.79** | **0.46** | **0.43** | **Найкращий ROC-AUC ✅** |
 
 Висновки
 
