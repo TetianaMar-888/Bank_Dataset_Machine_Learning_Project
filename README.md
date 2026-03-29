@@ -1,2 +1,43 @@
 # Bank_Dataset_Machine_Learning_Project
-Building a model to predict whether a client will place a term deposit at a bank.
+Опис задачі
+Бінарна класифікація: передбачити чи оформить клієнт строковий депозит (yes/no) на основі даних прямих маркетингових кампаній португальського банку. Датасет: 41,188 записів, 20 ознак, дисбаланс класів 89%/11%.
+
+Що було зроблено
+
+EDA та препроцесинг:
+Виявлено дисбаланс класів → застосовано SMOTE
+unknown залишено як окрему категорію для default, для інших колонок заповнено модою
+pdays (999 = не контактували) → перетворено на бінарну ознаку was_contacted
+duration виключено з моделі (data leakage), збережено для аналізу
+One-Hot Encoding категоріальних змінних → 48 ознак
+Split: 52.5% train / 17.5% val / 30% test зі stratify
+StandardScaler для LR та kNN
+
+Моделювання:
+Навчено 4 типи моделей
+Тюнінг XGBoost двома методами
+SHAP аналіз важливості ознак
+Аналіз помилок через duration_test
+
+
+Моделі
+#МодельОсобливості1Logistic Regressionбазова лінія, C=1.02kNNn_neighbors=53Decision Treedefault, max_depth=3, max_depth=54XGBoostdefault, RandomizedSearch, Bayesian Optimization
+
+Таблиця результатів
+МодельROC-AUC ValROC-AUC TestF1 TestRecall TestКоментарLogistic Regression0.710.730.390.42Базова лініяkNN0.710.730.390.47Повільний, слабкийDT (default)0.630.630.320.36Перенавчання DT (max_depth=5)0.750.750.470.57Хороший RecallDT (max_depth=3)0.750.760.460.61Найкращий Recall XGBoost (default)0.770.780.430.38Хороший базовийXGBoost (RandomizedSearch)0.760.770.430.37Гірший за defaultXGBoost (Bayesian)0.780.790.460.43Найкращий ROC-AUC 
+
+Висновки
+
+Досягнуто:
+XGBoost (Bayesian) — найкращий за ROC-AUC (0.79) та Precision
+DT (max_depth=3) — найкращий за Recall (0.61), знаходить 855/1392 клієнтів
+Мінімальне перенавчання у DT3 (Train vs Test різниця = 0.03)
+Клієнти з дзвінками >500 сек мають конверсію 40% vs 11% середньої
+SHAP показав що головні ознаки — nr.employed, cons.conf.idx, education — це економічно логічно 
+
+Для банківського маркетингу рекомендується DT (max_depth=3):
+Знаходить 855 клієнтів (61%) при мінімальному перенавчанні
+Прозора логіка — легко пояснюється менеджменту та регулятору
+
+Що можна покращити
+НапрямокЯкПоріг класифікаціїзнизити з 0.5 → підвищить RecallНові ознакисегментація віку, комбінація education+job, сезонністьСтратегія двох моделейDT3 відфільтровує "no" → XGBoost уточнює
