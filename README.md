@@ -25,7 +25,7 @@ SHAP аналіз важливості ознак
 | # | Модель | Особливості |
 |---|---|---|
 | 1 | Logistic Regression | базова лінія, C=1.0 |
-| 2 | kNN | n_neighbors=5 |
+| 2 | kNN | n_neighbors=7 |
 | 3 | Decision Tree | default, max_depth=3, max_depth=5 |
 | 4 | XGBoost | default, RandomizedSearch, Bayesian Optimization |
 
@@ -37,12 +37,12 @@ SHAP аналіз важливості ознак
 |---|---|---|---|---|---|
 | Logistic Regression | 0.71 | 0.73 | 0.39 | 0.42 | Базова лінія |
 | kNN | 0.71 | 0.73 | 0.39 | 0.47 | Повільний, слабкий |
-| DT (default) | 0.63 | 0.63 | 0.32 | 0.36 | Перенавчання ❌ |
+| DT (default) | 0.63 | 0.63 | 0.32 | 0.36 | Перенавчання  |
 | DT (max_depth=5) | 0.75 | 0.75 | 0.47 | 0.57 | Хороший Recall |
-| **DT (max_depth=3)** | **0.75** | **0.76** | **0.46** | **0.61** | **Найкращий Recall ✅** |
+| **DT (max_depth=3)** | **0.75** | **0.76** | **0.46** | **0.61** | **Найкращий Recall ** |
 | XGBoost (default) | 0.77 | 0.78 | 0.43 | 0.38 | Хороший базовий |
 | XGBoost (RandomizedSearch) | 0.76 | 0.77 | 0.43 | 0.37 | Гірший за default |
-| **XGBoost (Bayesian)** | **0.78** | **0.79** | **0.46** | **0.43** | **Найкращий ROC-AUC ✅** |
+| **XGBoost (Bayesian)** | **0.78** | **0.79** | **0.46** | **0.43** | **Найкращий ROC-AUC ** |
 
 Висновки
 
